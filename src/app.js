@@ -1,4 +1,4 @@
-function RocketComponent(props) {
+function Rocket(props) {
   const htmlElement = document.createElement('div');
   const innerHtml = `<h2>${props.name}</h2>`;
   htmlElement.innerHTML = innerHtml;
@@ -54,8 +54,12 @@ function storeInLocalStorage(data) {
   window.localStorage.setItem('data', JSON.stringify(data));
 }
 
+function getFromLocalStorate(key) {
+  return JSON.parse(window.localStorage.getItem(key));
+}
+
 async function loadData() {
-  let data = JSON.parse(window.localStorage.getItem('data'));
+  let data = getFromLocalStorate('data');
 
   if (!data) {
     data = await fetchRocketsData();
@@ -70,9 +74,7 @@ async function render() {
     const rockets = await loadData();
 
     for (const rocket of rockets) {
-      document
-        .querySelector('.rockets__section')
-        .append(RocketComponent(rocket));
+      document.querySelector('.rockets__section').append(Rocket(rocket));
     }
   } catch (e) {
     console.error(`❌ RENDER ERROR\n${e}`);
