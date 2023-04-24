@@ -50,8 +50,8 @@ async function fetchRocketsData() {
   }
 }
 
-function storeInLocalStorage(data) {
-  window.localStorage.setItem('data', JSON.stringify(data));
+function storeInLocalStorage(key, value) {
+  window.localStorage.setItem(key, JSON.stringify(value));
 }
 
 function getFromLocalStorage(key) {
@@ -63,7 +63,7 @@ async function loadData() {
 
   if (!data) {
     data = await fetchRocketsData();
-    storeInLocalStorage(data);
+    storeInLocalStorage('data', data);
   }
 
   return data;
@@ -73,8 +73,10 @@ async function render() {
   try {
     const rockets = await loadData();
 
+    const rocketsSectionElement = document.querySelector('.rockets__section');
+
     for (const rocket of rockets) {
-      document.querySelector('.rockets__section').append(Rocket(rocket));
+      rocketsSectionElement.append(Rocket(rocket));
     }
   } catch (e) {
     console.error(`❌ RENDER ERROR\n${e}`);
