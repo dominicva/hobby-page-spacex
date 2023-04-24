@@ -1,8 +1,15 @@
-const API_URL = 'https://api.spacexdata.com/v4/rockets';
+function RocketComponent(props) {
+  const htmlElement = document.createElement('div');
+  const innerHtml = `<h2>${props.name}</h2>`;
+  htmlElement.innerHTML = innerHtml;
+  return htmlElement;
+}
 
-async function getRocketsData(url) {
+async function fetchRocketsData() {
+  const API_URL = 'https://api.spacexdata.com/v4/rockets';
+
   try {
-    const res = await fetch(url);
+    const res = await fetch(API_URL);
     const data = await res.json();
     return data.map(
       ({
@@ -39,7 +46,7 @@ async function getRocketsData(url) {
       })
     );
   } catch (e) {
-    console.error(`❌ ERROR\nUnable to get rocket data\n${e}`);
+    console.error(`❌ DATA FETCHING ERROR\n${e}`);
   }
 }
 
@@ -48,12 +55,28 @@ function storeInLocalStorage(data) {
 }
 
 async function loadData() {
-  const existingData = window.localStorage.getItem('data');
+  let data = JSON.parse(window.localStorage.getItem('data'));
 
-  if (!existingData) {
-    const rocketsData = await getRocketsData(API_URL);
-    storeInLocalStorage(rocketsData);
+  if (!data) {
+    data = await fetchRocketsData();
+    storeInLocalStorage(data);
+  }
+
+  return data;
+}
+
+async function render() {
+  try {
+    const rockets = await loadData();
+
+    for (const rocket of rockets) {
+      document
+        .querySelector('.rockets__section')
+        .append(RocketComponent(rocket));
+    }
+  } catch (e) {
+    console.error(`❌ RENDER ERROR\n${e}`);
   }
 }
 
-loadData();
+window.addEventListener('DOMContentLoaded', render);
