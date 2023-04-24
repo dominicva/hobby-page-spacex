@@ -54,12 +54,12 @@ function storeInLocalStorage(data) {
   window.localStorage.setItem('data', JSON.stringify(data));
 }
 
-function getFromLocalStorate(key) {
+function getFromLocalStorage(key) {
   return JSON.parse(window.localStorage.getItem(key));
 }
 
 async function loadData() {
-  let data = getFromLocalStorate('data');
+  let data = getFromLocalStorage('data');
 
   if (!data) {
     data = await fetchRocketsData();
