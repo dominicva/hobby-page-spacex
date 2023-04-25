@@ -1,7 +1,11 @@
 import Rocket from './components/Rocket';
+import Starscape from './components/Starscape';
 import loadData from './lib/loadData';
 
 async function render() {
+  // starry background
+  document.body.prepend(Starscape());
+
   try {
     const rockets = await loadData();
 
