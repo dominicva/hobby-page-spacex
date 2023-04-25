@@ -1,11 +1,17 @@
 export default function Rocket(props) {
   const component = document.createElement('div');
+  component.className = 'rocket';
 
   const innerHtml = `
+  <img class="rocket__image" src="${props.images[0]}" alt="${props.name}" />
   <h2>${props.name}</h2>
-  <h3>${props.active ? '✅ In active service' : '❌ Inactive'}</h3>
+  <p class="rocket__description">${props.description}</p>
   <div>
-    <table>
+    <table class="rocket__table">
+    <tr>
+        <td>Active</td>
+        <td>${props.active ? '✅' : '❌'}</td>
+      </tr>
       <tr>
         <td>Cost per launch</td>
         <td>$${props.costPerLaunch}</td>
@@ -40,7 +46,7 @@ export default function Rocket(props) {
       </tr>
       <tr>
         <td></td>
-        <td>${props.country}%</td>
+        <td>${props.country}</td>
       </tr>
     </table>
   </div>
