@@ -3,7 +3,7 @@ import Starscape from './components/Starscape';
 import loadData from './lib/loadData';
 
 async function render() {
-  // starry background
+  // interactive starry background
   document.body.prepend(Starscape());
 
   try {
