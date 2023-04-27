@@ -44,10 +44,6 @@ export default function Rocket(props) {
     1
   )} engine${props.engines.number > 1 ? 's' : ''}</td>
       </tr>
-      <tr>
-        <td></td>
-        <td>${props.country}</td>
-      </tr>
     </table>
   </div>
   `;
