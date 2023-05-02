@@ -8,7 +8,7 @@ export default function Rocket(props) {
   const children = [ImageCarousel(props.images, props.name), RocketData(props)];
 
   for (const child of children) {
-    console.log(child);
+    // console.log(child);
     component.append(child);
   }
 

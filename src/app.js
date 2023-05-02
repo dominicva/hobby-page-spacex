@@ -13,7 +13,6 @@ async function render() {
 
     for (const rocket of rockets) {
       const component = Rocket(rocket);
-      console.log(component);
       rocketsSectionElement.append(component);
     }
   } catch (e) {
