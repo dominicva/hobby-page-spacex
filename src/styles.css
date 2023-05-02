@@ -18,6 +18,22 @@
   margin: 0;
   padding: 0;
   line-height: calc(1em + 0.5rem);
+  scrollbar-color: transparent transparent; /* thumb and track color */
+  scrollbar-width: 0px;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: none;
 }
 
 html,
@@ -45,6 +61,13 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 p,
@@ -92,6 +115,7 @@ canvas {
 }
 
 .rocket {
+  position: relative;
   background-color: var(--blue-darkest);
   padding-bottom: 1.5rem;
   margin: 2rem 0;
@@ -101,57 +125,122 @@ canvas {
     rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;
 }
 
-.rocket__image-slider {
-  width: 100%;
-  max-width: 800px;
-  height: 480px;
+.rocket__image-carousel {
   position: relative;
-  overflow: hidden;
+  perspective: 100px;
+  padding-top: 75%;
 }
 
-.rocket__image-slide {
-  width: 100%;
-  max-width: 800px;
-  height: 350px;
+.carousel__viewport {
   position: absolute;
-  transition: all 0.5s;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow-x: scroll;
+  counter-reset: item;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
-.rocket__image {
+.carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  counter-increment: item;
+}
+
+/* .carousel__slide:before {
+  content: counter(item);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -40%, 70px);
+  color: #fff;
+  font-size: 2em;
+} */
+
+.carousel__image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  margin: 0rem auto 1.5rem;
-  border-radius: 4px;
-  /* /* box-shadow: -2px 2px 4px 2px rgba(8, 2, 68, 0.6); */
+  scroll-snap-align: center;
 }
 
-.btn {
+.carousel__navigation {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  padding: 10px;
-  border: none;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+.carousel__navigation-list,
+.carousel__navigation-item {
+  display: inline-block;
+}
+
+.carousel__navigation-button {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #333;
+  background-clip: content-box;
+  border: 0.25rem solid transparent;
   border-radius: 50%;
-  z-index: 10;
-  cursor: pointer;
-  background-color: var(--white);
-  font-size: 18px;
+  font-size: 0;
+  transition: transform 0.1s;
 }
 
-.btn:active {
-  transform: scale(1.1);
+.carousel__navigation-button:hover,
+.carousel__navigation-button:active,
+.carousel__navigation-button:focus-within,
+.carousel__navigation-button:target {
+  background-color: white;
 }
 
-.btn-prev {
-  top: 45%;
-  left: 2%;
+/* .carousel::before,
+.carousel::after,
+.carousel__prev,
+.carousel__next {
+  position: absolute;
+  top: 0;
+  margin-top: 37.5%;
+  width: 4rem;
+  height: 4rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  font-size: 0;
+  outline: 0;
 }
 
-.btn-next {
-  top: 45%;
-  right: 2%;
+.carousel::before,
+.carousel__prev {
+  left: -1rem;
 }
+
+.carousel::after,
+.carousel__next {
+  right: -1rem;
+}
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  z-index: 1;
+  background-color: #333;
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  text-align: center;
+  pointer-events: none;
+} */
 
 .rocket__data-container {
   padding: 0 1.5rem;
@@ -167,4 +256,49 @@ canvas {
 
 .rocket__table {
   width: 100%;
+}
+
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: 100%;
+  }
+  98% {
+    left: 100%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: -300%;
+  }
+  98% {
+    left: -300%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+  97% {
+    scroll-snap-align: none;
+  }
+  99% {
+    scroll-snap-align: none;
+  }
+  100% {
+    scroll-snap-align: center;
+  }
 }
