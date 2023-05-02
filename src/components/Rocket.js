@@ -1,12 +1,38 @@
+function ImageSlide(imageSrc, altText) {
+  return `
+    <div class="rocket__image-slide">
+      <img class="rocket__image" src="${imageSrc}" alt="${altText}" />
+    </div>
+  `;
+}
+
+function ImageSlides(images, rocketName) {
+  let imageSlides = '';
+
+  for (const image of images) {
+    imageSlides += ImageSlide(image, rocketName);
+  }
+
+  imageSlides += `
+    <button class="btn btn-next"></button>
+    <button class="btn btn-prev"></button>
+  `;
+
+  return imageSlides;
+}
+
 export default function Rocket(props) {
   const component = document.createElement('div');
   component.className = 'rocket';
 
   const innerHtml = `
-  <img class="rocket__image" src="${props.images[0]}" alt="${props.name}" />
-  <h2>${props.name}</h2>
-  <p class="rocket__description">${props.description}</p>
-  <div>
+  <div class="rocket__image-slider">
+    ${ImageSlides(props.images, props.name)}
+  </div>
+  <div class="rocket__data-container">
+    <h2>${props.name}</h2>
+    <p class="rocket__description">${props.description}</p>
+
     <table class="rocket__table">
     <tr>
         <td>Active</td>
