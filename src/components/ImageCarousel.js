@@ -39,7 +39,7 @@ export default function ImageCarousel(imageSrcs = [], rocketName = 'rocket') {
     link.className = 'carousel__navigation-button';
     link.innerText = `Go to slide ${i + 1}`;
 
-    link.addEventListener('click', () => {
+    function updateNavLinks() {
       currentImageIdx = i;
       const links = navigationList.querySelectorAll(
         '.carousel__navigation-button'
@@ -51,7 +51,9 @@ export default function ImageCarousel(imageSrcs = [], rocketName = 'rocket') {
           link.classList.remove('active');
         }
       }
-    });
+    }
+
+    link.addEventListener('click', updateNavLinks);
 
     li.appendChild(link);
 

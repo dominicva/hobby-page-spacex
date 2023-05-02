@@ -142,7 +142,9 @@ canvas {
   bottom: 0;
   left: 0;
   display: flex;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
+  /* temporary measure to cover up poor swipe / nav logic */
+  overflow-x: hidden;
   counter-reset: item;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
