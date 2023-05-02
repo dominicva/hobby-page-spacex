@@ -151,16 +151,6 @@ canvas {
   counter-increment: item;
 }
 
-/* .carousel__slide:before {
-  content: counter(item);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -40%, 70px);
-  color: #fff;
-  font-size: 2em;
-} */
-
 .carousel__image {
   position: absolute;
   top: 0;
@@ -173,7 +163,7 @@ canvas {
 .carousel__navigation {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 1.25rem;
   left: 0;
   text-align: center;
 }
@@ -195,52 +185,13 @@ canvas {
   transition: transform 0.1s;
 }
 
-.carousel__navigation-button:hover,
-.carousel__navigation-button:active,
-.carousel__navigation-button:focus-within,
-.carousel__navigation-button:target {
+.carousel__navigation-button:hover {
   background-color: white;
 }
 
-/* .carousel::before,
-.carousel::after,
-.carousel__prev,
-.carousel__next {
-  position: absolute;
-  top: 0;
-  margin-top: 37.5%;
-  width: 4rem;
-  height: 4rem;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  font-size: 0;
-  outline: 0;
+.carousel__navigation-button.active {
+  background-color: white;
 }
-
-.carousel::before,
-.carousel__prev {
-  left: -1rem;
-}
-
-.carousel::after,
-.carousel__next {
-  right: -1rem;
-}
-
-.carousel::before,
-.carousel::after {
-  content: '';
-  z-index: 1;
-  background-color: #333;
-  background-size: 1.5rem 1.5rem;
-  background-repeat: no-repeat;
-  background-position: center center;
-  color: #fff;
-  font-size: 2.5rem;
-  line-height: 4rem;
-  text-align: center;
-  pointer-events: none;
-} */
 
 .rocket__data-container {
   padding: 0 1.5rem;
@@ -256,49 +207,4 @@ canvas {
 
 .rocket__table {
   width: 100%;
-}
-
-@keyframes tonext {
-  75% {
-    left: 0;
-  }
-  95% {
-    left: 100%;
-  }
-  98% {
-    left: 100%;
-  }
-  99% {
-    left: 0;
-  }
-}
-
-@keyframes tostart {
-  75% {
-    left: 0;
-  }
-  95% {
-    left: -300%;
-  }
-  98% {
-    left: -300%;
-  }
-  99% {
-    left: 0;
-  }
-}
-
-@keyframes snap {
-  96% {
-    scroll-snap-align: center;
-  }
-  97% {
-    scroll-snap-align: none;
-  }
-  99% {
-    scroll-snap-align: none;
-  }
-  100% {
-    scroll-snap-align: center;
-  }
 }
